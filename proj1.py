@@ -1,5 +1,5 @@
 import sys
-sys.setrecursionlimit(1500)
+sys.setrecursionlimit(4500)
 letters = []
 def main():
 
