@@ -3,6 +3,15 @@ sys.setrecursionlimit(20)
 letters = ['H', 'G', 'G', 'T', 'H', 'W', 'H', 'W', 'W', 'H', 'T', 'G']
 def main():
 
+    deezLetters = []
+
+    infile = open("file.txt", 'r')
+    for line in infile:
+        line = line.strip("\n")
+        for char in line:
+            deezLetters.append(char)
+
+
     n = len(letters)
     
     i = 0
