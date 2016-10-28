@@ -1,15 +1,19 @@
 import sys
 sys.setrecursionlimit(20)
-letters = ['H', 'G', 'G', 'T', 'H', 'W', 'H', 'W', 'W', 'H', 'T', 'G']
+letters = []
 def main():
 
-    deezLetters = []
+    if len(sys.argv) != 2:
+        print("Usage: python proj1.py <input file>")
+        return 1
 
-    infile = open("file.txt", 'r')
+    inputFile = sys.argv[1]
+    
+    infile = open(inputFile, 'r')
     for line in infile:
         line = line.strip("\n")
         for char in line:
-            deezLetters.append(char)
+            letters.append(char)
 
 
     n = len(letters)
