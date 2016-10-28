@@ -17,15 +17,37 @@ def main():
 
 
     n = len(letters)
-    
-    i = 0
-    j = i+5
 
-    result = OPT(i, j)
+    result, resultList = OPT(0, n-1)
     
     print("Result = ", result)
+    print("Result list = ", resultList)
 
+def OPT(i, j):
 
+    result = 0
+    resultList = []
+
+    for t in range(j-5, i-1, -1):
+
+        #print("Pair? (" + letters[t] + ", " + letters[j] + ")")
+        if not validPair(letters[t], letters[j]):
+            subresult, subresultList = OPT(i, j-1)
+        else:
+            subresult1, subresultList1 = OPT(i, t-1)
+            subresult2, subresultList2 = OPT(t+1, j)
+            subresult =  subresult1 + subresult2 + 1
+            subresultList = subresultList1 + subresultList2 + [(t, j)]
+
+        if subresult > result:
+            result = subresult
+            resultList = subresultList
+
+    print("OPT(" + str(i) + ", " + str(j) + ") returning " + str(result) + ", resultList:", resultList)
+    return result, resultList
+    
+
+"""
 def OPT(i, j):
 
     
@@ -58,7 +80,7 @@ def OPT(i, j):
         return total
     else:
         return result
-    
+""" 
 
 def validPair(x, y):
     if x == "H" and y == "G":
