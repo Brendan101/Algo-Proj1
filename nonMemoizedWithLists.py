@@ -1,5 +1,7 @@
 import sys
+import time
 sys.setrecursionlimit(4500)
+start_time = time.time()
 letters = []
 def main():
 
@@ -17,7 +19,7 @@ def main():
             if len(letters) < n:
                 letters.append(char)
             
-
+    print("n = ", n)
 
     result, resultList= OPT(0, n-1)
     
@@ -62,5 +64,6 @@ def validPair(x, y):
 
 main()
 
+print("Time:", (time.time() - start_time))
     
     

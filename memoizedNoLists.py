@@ -25,6 +25,8 @@ def main():
     for i in range(n):
         solutions.append([-1] * n)
 
+    print("n = ", n)
+
     result = OPT(0, n-1)
     
     print("Result = ", result)
