@@ -3,20 +3,21 @@ sys.setrecursionlimit(4500)
 letters = []
 def main():
 
-    if len(sys.argv) != 2:
-        print("Usage: python proj1.py <input file>")
+    if len(sys.argv) != 3:
+        print("Usage: python proj1.py <input file> <num chars>")
         return 1
 
     inputFile = sys.argv[1]
-    
+    n = int(sys.argv[2])
+
     infile = open(inputFile, 'r')
     for line in infile:
         line = line.strip("\n")
         for char in line:
-            letters.append(char)
+            if len(letters) < n:
+                letters.append(char)
+            
 
-
-    n = len(letters)
 
     result, resultList= OPT(0, n-1)
     
