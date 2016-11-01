@@ -40,9 +40,9 @@ def OPT(i, j):
     for t in range(j-5, i-1, -1):
 
         if not validPair(letters[t], letters[j]):
-            if solutions[t][j-1] == -1:
-                subresult = OPT(t, j-1)
-                solutions[t][j-1] = subresult
+            if solutions[i][j-1] == -1:
+                subresult = OPT(i, j-1)
+                solutions[i][j-1] = subresult
             else: 
                 subresult = solutions[i][j-1]
         else:
