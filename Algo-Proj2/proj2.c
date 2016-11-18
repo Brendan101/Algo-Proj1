@@ -3,11 +3,11 @@
 #include <stdbool.h>
 #include <string.h>
 
-char pair1a = 'A';
-char pair1b = 'U';
+char pair1a = 'H';
+char pair1b = 'G';
 
-char pair2a = 'C';
-char pair2b = 'G';
+char pair2a = 'T';
+char pair2b = 'W';
 
 //determines the size of the letters array
 int sizeOfFile = 100000;
@@ -76,12 +76,12 @@ void readFile(char* inputFile, int numChars, char* letters){
 }
 
 
-int OPT(int n, char letters[], int **solutions){
+int OPT(int n, char letters[], int solutions[][n]){
 
   //preprocess the matrix, any (i, j) too close together have no pairs
   for(int i = 0; i < n; i++){
     for(int j = 0; j < n; j++){
-      if(j-1 <= 4){
+      if(j-i <= 4){
 	solutions[i][j] = 0;
       }
     }
@@ -102,7 +102,8 @@ int OPT(int n, char letters[], int **solutions){
       //find maximum # of pairs over subproblems of this problem (i, j)
       result = 0;
 
-      for(int t = j-5; t > i - 1; i--){
+      for(int t = j-5; t > i - 1; t--){
+	
 	if(!validPair(letters[t], letters[j])){
 	  subresult = solutions[i][j-1];
 	}
@@ -164,6 +165,6 @@ int main(int argc, char *argv[]){
 
   int result = OPT(numChars, letters, solutions);
 
-  printf("Result = %d" ,result);
+  printf("Result = %d\n" ,result);
 
 }
