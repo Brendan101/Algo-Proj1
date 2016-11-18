@@ -76,6 +76,69 @@ void readFile(char* inputFile, int numChars, char* letters){
 }
 
 
+int OPT(int n, char letters[], int **solutions){
+
+  //preprocess the matrix, any (i, j) too close together have no pairs
+  for(int i = 0; i < n; i++){
+    for(int j = 0; j < n; j++){
+      if(j-1 <= 4){
+	solutions[i][j] = 0;
+      }
+    }
+  }
+
+
+
+  //The algorithm
+  int subresult = 0;
+  int subresult1 = 0;
+  int subresult2 = 0;
+  int result = 0;
+
+  //loop from bottom left to top right of solutions matrix
+  for(int i = n-1; i > 0; i--){
+    for(int j = i+4; j < n; j++){
+
+      //find maximum # of pairs over subproblems of this problem (i, j)
+      result = 0;
+
+      for(int t = j-5; t > i - 1; i--){
+	if(!validPair(letters[t], letters[j])){
+	  subresult = solutions[i][j-1];
+	}
+	
+	else{
+	  
+	  //double check t-1 is in bounds of matrix
+	  if(t-1 >= 0){
+	    subresult1 = solutions[i][t-1];
+	  }
+	  else{
+	    subresult1 = 0;
+	  }
+
+	  subresult2 = solutions[t+1][j-1];
+	  subresult = subresult1 + subresult2 + 1;
+	  
+	}
+	
+	if(subresult > result){
+	  result = subresult;
+	}
+      }
+      
+
+      solutions[i][j] = result;
+    }
+  }
+
+  //the answer is in the top right corner of the solutions matrix
+  return solutions[0][n-1];
+}
+
+
+
+
 
 int main(int argc, char *argv[]){
   
@@ -97,10 +160,10 @@ int main(int argc, char *argv[]){
 
   printf("List of Characters: \n%s\n", letters);
 
-  
+  int solutions[numChars][numChars];
 
+  int result = OPT(numChars, letters, solutions);
 
-
-
+  printf("Result = %d" ,result);
 
 }
