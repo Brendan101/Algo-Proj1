@@ -96,7 +96,7 @@ int OPT(int n, char letters[], int **solutions){
   int result = 0;
 
   //loop from bottom left to top right of solutions matrix
-  for(int i = n-1; i > 0; i--){
+  for(int i = n-1; i > -1; i--){
     for(int j = i+4; j < n; j++){
 
       //find maximum # of pairs over subproblems of this problem (i, j)
