@@ -2,12 +2,14 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <omp.h>
+#include <time.h>
 
-char pair1a = 'H';
-char pair1b = 'G';
+char pair1a = 'A';
+char pair1b = 'U';
 
-char pair2a = 'T';
-char pair2b = 'W';
+char pair2a = 'C';
+char pair2b = 'G';
 
 //determines the size of the letters array
 int sizeOfFile = 100000;
@@ -158,13 +160,20 @@ int main(int argc, char *argv[]){
   //reads file into letters array
   readFile(inputFile, numChars, letters);
 
-
-  printf("List of Characters: \n%s\n", letters);
+ 
+  //printf("List of Characters: \n%s\n", letters);
 
   int solutions[numChars][numChars];
 
+  //Get time before algorithm runs
+  double t0 = omp_get_wtime();
+  
   int result = OPT(numChars, letters, solutions);
 
+  //Calculate time algorithm took
+  double t = omp_get_wtime() - t0;
+  
   printf("Result = %d\n" ,result);
+  printf("Total time: %f\n", t);
 
 }
