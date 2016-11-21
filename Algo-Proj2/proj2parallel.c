@@ -98,10 +98,12 @@ int OPT(int n, char letters[], int solutions[][n]){
   int result = 0;
 
   //loop from bottom left to top right of solutions matrix
-#pragma omp for
+#pragma omp parallel for
   for(int i = n-1; i > -1; i--){
     for(int j = i+4; j < n; j++){
 
+      printf("iteration (%d, %d)\n", i, j); 
+      
       //find maximum # of pairs over subproblems of this problem (i, j)
       result = 0;
       
