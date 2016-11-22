@@ -78,7 +78,7 @@ void readFile(char* inputFile, int numChars, char* letters){
 }
 
 
-int OPT(int n, char letters[], int solutions[][n]){
+int OPT(int n, char letters[], int **solutions){
 
   //preprocess the matrix, any (i, j) too close together have no pairs
   for(int i = 0; i < n; i++){
@@ -173,10 +173,20 @@ int main(int argc, char *argv[]){
   //reads file into letters array
   readFile(inputFile, numChars, letters);
 
- 
-  //printf("List of Characters: \n%s\n", letters);
 
-  int solutions[numChars][numChars];
+  //allocate solutions matrix
+  int **solutions;
+  if((solutions = (int**)malloc(numChars * sizeof(int*))) == NULL){
+    printf("Allocation error\n");
+    return(1);
+  }
+  for(int i = 0; i < numChars; i++){
+    if((solutions[i] = (int*)malloc(numChars * sizeof(int))) == NULL){
+      printf("Allocation erro\n");
+      return(1);
+    }
+  }
+  
 
   //Get time before algorithm runs
   double t0 = omp_get_wtime();
@@ -185,6 +195,8 @@ int main(int argc, char *argv[]){
 
   //Calculate time algorithm took
   double t = omp_get_wtime() - t0;
+
+  free(solutions);
 
   /*print results matrix
   for(int i = 0; i < numChars; i++){
