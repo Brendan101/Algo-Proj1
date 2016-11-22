@@ -104,8 +104,8 @@ int OPT(int n, char letters[], int **solutions){
   
   //loop thru each next unsolved diagonal of the matrix
   for(int diag = 4; diag <= n; diag++){
-    
-    #pragma omp for schedule(guided)
+    //compute entire diagonal in parallel
+    #pragma omp for
     for(int offset = 0; offset <= n - diag; offset++){
 
       //calculate i,j values of current iter
