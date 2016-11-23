@@ -1,5 +1,6 @@
 Instructions:
- Use "make" to compile proj2.c and output a runnable proj2 file
+ Use "make" to compile proj2.c into proj2
+ export OMP_NUM_THREADS=<p>
  ./proj2 <input file> <num chars to read>
 
 Description:
